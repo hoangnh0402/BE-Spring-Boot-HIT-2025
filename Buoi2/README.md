@@ -65,14 +65,15 @@ Thêm dependency vào `pom.xml`:
 Cấu hình trong `application.properties`:
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/mydatabase
+spring.datasource.url=jdbc:mysql://localhost:3306/mydatabase?createDatabaseIfNotExist=true
 spring.datasource.username=root
-spring.datasource.password=yourpassword
+spring.datasource.password=your password
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+
 ```
 
 ### 3. Tạo Entity & Repository
@@ -187,25 +188,59 @@ Tạo file `src/main/resources/templates/employees.html`:
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Danh sách nhân viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
-    <h2>Danh sách nhân viên</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Email</th>
-            <th>Phòng ban</th>
-        </tr>
-        <tr th:each="employee : ${employees}">
-            <td th:text="${employee.id}"></td>
-            <td th:text="${employee.name}"></td>
-            <td th:text="${employee.email}"></td>
-            <td th:text="${employee.department.name}"></td>
-        </tr>
-    </table>
+<h2>Danh sách nhân viên</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>Phòng ban</th>
+    </tr>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.name}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.department.name}"></td>
+    </tr>
+</table>
 </body>
 </html>
+
 ```
 
 ---
