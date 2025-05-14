@@ -12,9 +12,9 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI().info(
                 new Info()
-                        .title("Booking Hotel API")
+                        .title("Hotel API")
                         .version("1.0")
-                        .description("Documentation Booking Hotel API v1.0")
+                        .description("Documentation Hotel API v1.0")
         );
     }
 }
